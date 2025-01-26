@@ -93,7 +93,7 @@ python manage.py test
   - DB_PORT=
 - Use `Postman` or `cURL` to test API endpoints.
   - postman collection; `SnipBox_Backend_API_collection.json` is added in the root folder
-
+- API Documentaion: https://documenter.getpostman.com/view/16985380/2sAYQgg85f
 ---
 
 
