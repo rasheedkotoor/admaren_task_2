@@ -30,6 +30,14 @@ class SnipBoxAPITestCase(APITestCase):
         self.token = response.data.get("access")
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
 
+    def test_snippets_overview(self):
+        """
+        Test listing all snippets.
+        """
+        response = self.client.get('/snippets/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(response.data), 1)
+
     def test_create_snippet(self):
         """
         Test creating a new snippet.
