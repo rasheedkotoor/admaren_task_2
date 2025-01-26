@@ -57,6 +57,20 @@ class SnippetUpdateAPI(generics.UpdateAPIView):
         serializer.save()
 
 
+class SnippetDeleteAPI(generics.DestroyAPIView):
+    """API to delete a snippet (only by the owner)"""
+    serializer_class = SnippetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Snippet.objects.filter(created_by=self.request.user)
+
+    def perform_destroy(self, instance):
+        if instance.created_by != self.request.user:
+            raise PermissionDenied("You do not have permission to delete this snippet.")
+        instance.delete()
+
+
 class TagListAPIView(generics.ListAPIView):
     """
     API to list all tags.
