@@ -51,3 +51,11 @@ class SnipBoxAPITestCase(APITestCase):
         response = self.client.post('/snippets/create/', data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["title"], "New Snippet")
+
+    def test_list_tags(self):
+        """
+        Test retrieving all tags.
+        """
+        response = self.client.get('/tags/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(response.data), 1)
