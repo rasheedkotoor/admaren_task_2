@@ -67,3 +67,11 @@ class SnipBoxAPITestCase(APITestCase):
         response = self.client.get('/tags/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
+
+    def test_tag_detail(self):
+        """
+        Test retrieving snippets by tag.
+        """
+        response = self.client.get(f'/tags/{self.tag.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(response.data["snippets"]), 1)
