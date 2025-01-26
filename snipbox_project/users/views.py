@@ -1,4 +1,7 @@
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView
+)
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -39,4 +42,3 @@ class CustomTokenRefreshView(TokenRefreshView):
     """Refresh Token API"""
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
-

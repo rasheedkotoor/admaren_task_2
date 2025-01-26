@@ -1,6 +1,15 @@
 from django.urls import path
-from .views import SnippetCreateAPI, SnippetOverviewAPI, SnippetDetailAPI, SnippetUpdateAPI, SnippetDeleteAPI
-from .views import TagListAPIView, TagDetailAPIView
+from .views import (
+    SnippetCreateAPI,
+    SnippetOverviewAPI,
+    SnippetDetailAPI,
+    SnippetUpdateAPI,
+    SnippetDeleteAPI,
+)
+from .views import (
+    TagListAPIView,
+    TagDetailAPIView
+)
 
 
 urlpatterns = [

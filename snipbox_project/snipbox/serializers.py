@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from .models import Snippet, Tag
+from .models import (
+    Snippet,
+    Tag
+)
 
 
 class TagSerializer(serializers.ModelSerializer):

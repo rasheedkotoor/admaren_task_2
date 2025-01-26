@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Snippet, Tag
+from .models import (
+    Snippet,
+    Tag
+)
 
 
 @admin.register(Tag)
