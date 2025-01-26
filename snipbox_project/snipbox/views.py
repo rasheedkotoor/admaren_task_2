@@ -1,7 +1,26 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from .serializers import SnippetSerializer
+from .models import Snippet
+
+
+class SnippetOverviewAPI(generics.ListAPIView):
+    """API to list all snippets with total count"""
+    serializer_class = SnippetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Snippet.objects.filter(created_by=self.request.user)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        response_data = {
+            "total_snippets": queryset.count(),
+            "snippets": self.get_serializer(queryset, many=True).data
+        }
+        return Response(response_data)
 
 
 class SnippetCreateAPI(generics.CreateAPIView):
