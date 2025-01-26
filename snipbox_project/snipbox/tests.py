@@ -38,6 +38,14 @@ class SnipBoxAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
+    def test_snippet_detail(self):
+        """
+        Test retrieving snippets by id.
+        """
+        response = self.client.get(f"/snippets/{self.snippet.id}/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(response.data), 1)
+
     def test_create_snippet(self):
         """
         Test creating a new snippet.
