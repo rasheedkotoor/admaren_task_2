@@ -7,7 +7,7 @@ from .models import Snippet, Tag
 
 
 class SnippetOverviewAPI(generics.ListAPIView):
-    """API to list all snippets with total count"""
+    """API to list all snippets with total count (only for the owner)"""
     serializer_class = SnippetSerializer
     permission_classes = [IsAuthenticated]
 
@@ -30,6 +30,15 @@ class SnippetCreateAPI(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+class SnippetDetailAPI(generics.RetrieveAPIView):
+    """API to retrieve snippet details (only for the owner)"""
+    serializer_class = SnippetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Snippet.objects.filter(created_by=self.request.user)
 
 
 class TagListAPIView(generics.ListAPIView):
