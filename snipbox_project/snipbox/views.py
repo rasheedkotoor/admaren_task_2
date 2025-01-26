@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -39,6 +40,21 @@ class SnippetDetailAPI(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Snippet.objects.filter(created_by=self.request.user)
+
+
+class SnippetUpdateAPI(generics.UpdateAPIView):
+    """API to update a snippet (only by the owner)"""
+    serializer_class = SnippetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Snippet.objects.filter(created_by=self.request.user)
+
+    def perform_update(self, serializer):
+        snippet = self.get_object()
+        if snippet.created_by != self.request.user:
+            raise PermissionDenied("You do not have permission to update this snippet.")
+        serializer.save()
 
 
 class TagListAPIView(generics.ListAPIView):

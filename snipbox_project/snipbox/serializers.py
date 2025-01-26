@@ -40,3 +40,14 @@ class SnippetSerializer(serializers.ModelSerializer):
             snippet.tags.add(tag)
 
         return snippet
+
+    def update(self, instance, validated_data):
+        """Handle updating tags properly"""
+        tags_data = validated_data.pop('tags', None)
+        if tags_data is not None:
+            instance.tags.clear()  # Remove existing tags
+            for tag_title in tags_data:
+                tag, created = Tag.objects.get_or_create(title=tag_title)
+                instance.tags.add(tag)
+
+        return super().update(instance, validated_data)
