@@ -60,6 +60,20 @@ class SnipBoxAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["title"], "New Snippet")
 
+    def test_update_snippet(self):
+        """
+        Test updating an existing snippet.
+        """
+        data = {
+            "title": "Updated Snippet",
+            "note": "Updated note",
+            "tags": [self.tag.id, ],
+            "created_by": self.user.id,
+        }
+        response = self.client.put(f'/snippets/{self.snippet.id}/update/', data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title"], "Updated Snippet")
+
     def test_list_tags(self):
         """
         Test retrieving all tags.
