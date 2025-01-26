@@ -74,6 +74,13 @@ class SnipBoxAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["title"], "Updated Snippet")
 
+    def test_delete_snippet(self):
+        """
+        Test deleting a snippet.
+        """
+        response = self.client.delete(f'/snippets/{self.snippet.id}/delete/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
     def test_list_tags(self):
         """
         Test retrieving all tags.
