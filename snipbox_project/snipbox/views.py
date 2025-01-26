@@ -48,3 +48,12 @@ class TagListAPIView(generics.ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = [IsAuthenticated]
+
+
+class TagDetailAPIView(generics.RetrieveAPIView):
+    """
+    API to retrieve snippets linked to a specific tag.
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [IsAuthenticated]

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import SnippetCreateAPI, SnippetOverviewAPI, SnippetDetailAPI
-from .views import TagListAPIView
+from .views import TagListAPIView, TagDetailAPIView
 
 
 urlpatterns = [
@@ -8,6 +8,6 @@ urlpatterns = [
     path('snippets/create/', SnippetCreateAPI.as_view(), name='snippet-create'),
     path('snippets/<int:pk>/', SnippetDetailAPI.as_view(), name='snippet-detail'),
 
-
     path('tags/', TagListAPIView.as_view(), name='tag-list'),
+    path('tags/<int:pk>/', TagDetailAPIView.as_view(), name='tag-detail'),
 ]
