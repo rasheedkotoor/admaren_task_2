@@ -2,8 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import SnippetSerializer
-from .models import Snippet
+from .serializers import SnippetSerializer, TagSerializer
+from .models import Snippet, Tag
 
 
 class SnippetOverviewAPI(generics.ListAPIView):
@@ -30,3 +30,12 @@ class SnippetCreateAPI(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+class TagListAPIView(generics.ListAPIView):
+    """
+    API to list all tags.
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [IsAuthenticated]

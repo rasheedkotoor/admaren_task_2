@@ -4,10 +4,18 @@ from .models import Snippet, Tag
 
 class TagSerializer(serializers.ModelSerializer):
     """Serializer for Tag model"""
+    snippets = serializers.SerializerMethodField()
 
     class Meta:
         model = Tag
-        fields = ['id', 'title']
+        fields = ['id', 'title', 'snippets']
+
+    def get_snippets(self, obj):
+        """Return a list of snippets associated with the tag."""
+        return [
+            {"id": snippet.id, "title": snippet.title, "note": snippet.note}
+            for snippet in obj.snippet_set.all()
+        ]
 
 
 class SnippetSerializer(serializers.ModelSerializer):
