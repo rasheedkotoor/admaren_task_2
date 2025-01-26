@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+
+# Django-related
+*.log
+db.sqlite3
+*.sqlite3
+
+# Ignore environment variables
+.env
+*.env
+
+# IDE / Editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Migrations (if auto-generated and not needed in version control)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Static and compiled files
+staticfiles/
+
+# Coverage reports
+.coverage
+htmlcov/
+*.cover
